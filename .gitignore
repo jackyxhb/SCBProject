@@ -81,3 +81,5 @@ node_modules
 *.pem
 *.key
 *.p12
+package-lock.json
+web-app/frontend/package-lock.json
