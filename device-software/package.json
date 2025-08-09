@@ -1,0 +1,28 @@
+{
+  "name": "scb-device",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "device.js",
+  "scripts": {
+  "start": "node device.js",
+  "start:mock": "SCB_MOCK_GPIO=1 node device.js",
+  "health": "node tools/health.js",
+  "unlock": "node tools/unlock.js",
+  "unlock:demo": "node tools/unlock.js 500",
+  "scan": "node tools/scan.js",
+  "scan:any": "DEV_ACCEPT_ANY=1 node tools/scan.js demo 500",
+  "lint": "eslint . --ext js,jsx --max-warnings=0",
+  "format": "prettier --check .",
+  "format:write": "prettier --write .",
+  "test": "node -e \"console.log('No tests yet')\""
+  },
+  "dependencies": {
+    "onoff": "^6.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "eslint-plugin-react": "^7.34.3",
+    "prettier": "^3.3.3"
+  }
+}

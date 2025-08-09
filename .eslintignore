@@ -1,0 +1,12 @@
+node_modules/
+**/node_modules/
+build/
+dist/
+coverage/
+.android/
+.ios/
+android/
+ios/
+.expo/
+.expo-shared/
+**/*.log

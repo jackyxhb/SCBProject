@@ -1,0 +1,25 @@
+{
+  "name": "scb-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "lint": "eslint . --ext js,jsx --max-warnings=0",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "test": "node -e \"console.log('No tests yet')\""
+  },
+  "dependencies": {
+  "express": "^4.19.2",
+  "firebase-admin": "^12.5.0",
+  "qrcode": "^1.5.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "eslint-plugin-react": "^7.34.3",
+    "prettier": "^3.3.3"
+  }
+}

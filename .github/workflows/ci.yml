@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      - name: Install
+        working-directory: web-app/backend
+        run: npm ci || npm install
+      - name: Lint
+        working-directory: web-app/backend
+        run: npm run lint || true
+      - name: Test
+        working-directory: web-app/backend
+        run: npm test || true
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      - name: Install
+        working-directory: web-app/frontend
+        run: npm ci || npm install
+      - name: Lint
+        working-directory: web-app/frontend
+        run: npm run lint || true
+      - name: Test
+        working-directory: web-app/frontend
+        run: npm test || true
+
+  device:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      - name: Install
+        working-directory: device-software
+        run: npm ci || npm install
+      - name: Lint
+        working-directory: device-software
+        run: npm run lint || true
+      - name: Test
+        working-directory: device-software
+        run: npm test || true
+
+  mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      - name: Install
+        working-directory: mobile-app/SCBApp
+        run: npm ci || npm install
+      - name: Lint
+        working-directory: mobile-app/SCBApp
+        run: npm run lint || true
+      - name: Test
+        working-directory: mobile-app/SCBApp
+        run: npm test || true

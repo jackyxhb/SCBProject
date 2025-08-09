@@ -1,0 +1,19 @@
+{
+  "name": "scb-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "echo 'Add your chosen React tooling (Vite/Create React App) later'",
+    "lint": "eslint . --ext js,jsx --max-warnings=0",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "test": "node -e \"console.log('No tests yet')\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "eslint-plugin-react": "^7.34.3",
+    "prettier": "^3.3.3"
+  }
+}

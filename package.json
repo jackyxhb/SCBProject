@@ -1,0 +1,9 @@
+{
+  "name": "scbproject-monorepo",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "lint": "echo 'Run lint per package: backend/frontend/mobile/device'",
+    "format": "echo 'Run format per package'"
+  }
+}
