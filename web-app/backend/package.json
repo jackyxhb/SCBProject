@@ -10,7 +10,7 @@
     "lint": "eslint . --ext js,jsx --max-warnings=0",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
-    "test": "node -e \"console.log('No tests yet')\""
+  "test": "node --test"
   },
   "dependencies": {
   "express": "^4.19.2",
