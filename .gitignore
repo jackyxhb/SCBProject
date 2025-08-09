@@ -1,3 +1,47 @@
+# General
+.DS_Store
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Builds/Outputs
+dist/
+build/
+coverage/
+.next/
+.vite/
+out/
+
+# Expo/React Native
+.expo/
+.expo-shared/
+android/
+ios/
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+
+# Firebase/Emulators
+.firebase/
+firebase-debug.log*
+
+# Device logs
+device-software/*.log
+device-software/logs/
+
+# Local config (do not commit real Firebase client config)
+mobile-app/SCBApp/firebase.js
 # Firebase build and deployment files
 /firebase-debug.log
 /firebase-debug.*.log
@@ -29,3 +73,11 @@ yarn-error.log*
 .DS_Store
 
 node_modules
+# Additional secrets and keys
+.env
+**/.env
+**/*.env.local
+**/*.local
+*.pem
+*.key
+*.p12
