@@ -2,11 +2,12 @@ import { Router } from 'express';
 import { generateQrKey, validateQrPayload } from '../lib/qr.js';
 import { ensureKeyPair } from '../lib/crypto.js';
 import store from '../lib/store/index.js';
+import { qrLimiter } from '../lib/rateLimit.js';
 
 const router = Router();
 
 // Example placeholder endpoint patterns to mirror in future features
-router.post('/qr/generate', async (req, res) => {
+router.post('/qr/generate', qrLimiter, async (req, res) => {
   const { boxId, ttlSeconds } = req.body || {};
   if (!boxId) return res.status(400).json({ ok: false, error: 'boxId required' });
   try {
@@ -17,7 +18,7 @@ router.post('/qr/generate', async (req, res) => {
   }
 });
 
-router.post('/qr/validate', async (req, res) => {
+router.post('/qr/validate', qrLimiter, async (req, res) => {
   const { payload } = req.body || {};
   if (!payload) return res.status(400).json({ ok: false, error: 'payload required' });
   const result = await validateQrPayload({ payload });
@@ -25,9 +26,9 @@ router.post('/qr/validate', async (req, res) => {
   return res.status(status).json({ ok: result.valid, data: result.valid ? { id: result.id } : undefined, error: result.valid ? undefined : result.error });
 });
 
+// Deprecated: prefer POST /api/parcels/:id/notify
 router.post('/notify/recipient', (req, res) => {
-  // TODO: implement Twilio/nodemailer
-  return res.json({ ok: true });
+  return res.status(410).json({ ok: false, error: 'deprecated' });
 });
 
 router.get('/qr/public-key', (req, res) => {

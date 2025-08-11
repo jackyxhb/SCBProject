@@ -1,0 +1,12 @@
+# Ignore everything by default; Vercel uses builds defined in vercel.json
+# Node module caches are managed by Vercel, not uploaded from local
+node_modules
+**/node_modules
+
+# Local env and keys
+.env*
+.keys/
+
+# Editor and OS
+.vscode/
+.DS_Store

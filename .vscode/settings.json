@@ -1,0 +1,19 @@
+{
+  // Enable integrated shell integration for zsh
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": ["-l"],
+      "icon": "terminal"
+    }
+  },
+  // Turn on enhanced shell integration features where supported
+  "terminal.integrated.shellIntegration.enabled": true,
+  // Ensure environment is inherited (useful for Vercel/Node tools)
+  "terminal.integrated.inheritEnv": true,
+  // Use modern renderer for better perf
+  "terminal.integrated.gpuAcceleration": "on",
+  // Better scrollback for long build logs
+  "terminal.integrated.scrollback": 5000
+}

@@ -32,4 +32,24 @@ export const api = {
     if (!res.ok || !json.ok) throw new Error(json.error || `HTTP ${res.status}`);
     return json.data.publicKey;
   },
+  async createParcel({ boxId, recipientUid }) {
+    const res = await fetch(`${BASE}/parcels`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ boxId, recipientUid }),
+    });
+    const json = await res.json();
+    if (!res.ok || !json.ok) throw new Error(json.error || `HTTP ${res.status}`);
+    return json.data;
+  },
+  async notifyParcel({ parcelId, phone, email, ttlSeconds = 900 }) {
+    const res = await fetch(`${BASE}/parcels/${parcelId}/notify`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ phone, email, ttlSeconds }),
+    });
+    const json = await res.json();
+    if (!res.ok || !json.ok) throw new Error(json.error || `HTTP ${res.status}`);
+    return json.data;
+  },
 };
