@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/tasks.json",
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Dev: frontend",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev", "-w", "frontend"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: backend",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev", "-w", "backend"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: all",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Test: backend",
+      "type": "shell",
+      "command": "npm",
+      "args": ["-w", "backend", "test"],
+      "problemMatcher": ["$jest-stare"]
+    }
+  ]
+}

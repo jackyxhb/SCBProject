@@ -1,0 +1,26 @@
+{
+  "name": "scbproject-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+  "dev": "nodemon server.js",
+  "start": "node server.js",
+  "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+  "build": "node -e \"console.log('backend build: no-op')\"",
+  "key:print": "node ./scripts/print-public-key.js",
+  "qr:purge": "node ./scripts/purge-expired.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+  "express": "^4.19.2",
+  "helmet": "^7.1.0",
+  "firebase-admin": "^12.4.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "nodemon": "^3.1.0"
+  }
+}
