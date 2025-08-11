@@ -1,7 +1,9 @@
 import React from 'react';
+import { onAuth, signIn, logOut } from './auth.js';
 import { api } from './api.js';
 
 export default function App() {
+  const [user, setUser] = React.useState(null);
   const [status, setStatus] = React.useState('');
   const [boxId, setBoxId] = React.useState('BOX123');
   const [ttl, setTtl] = React.useState(300);
@@ -18,6 +20,8 @@ export default function App() {
 
   React.useEffect(() => {
     api.health().then(setStatus).catch((e) => setStatus(`error: ${e.message}`));
+  const unsub = onAuth(setUser);
+  return () => unsub && unsub();
   }, []);
 
   async function handleGenerate(e) {
@@ -36,6 +40,20 @@ export default function App() {
   return (
     <div style={{ fontFamily: 'sans-serif', padding: 24, maxWidth: 680 }}>
       <h1>Smart Courier Box</h1>
+      {import.meta.env.VITE_FIREBASE_API_KEY ? (
+        <div style={{ marginBottom: 12 }}>
+          {user ? (
+            <>
+              <span>Signed in as {user.email || user.displayName}</span>
+              <button style={{ marginLeft: 8 }} onClick={logOut}>Logout</button>
+            </>
+          ) : (
+            <button onClick={signIn}>Login with Google</button>
+          )}
+        </div>
+      ) : (
+        <p style={{ color: '#666', marginBottom: 12 }}>Auth disabled (set VITE_FIREBASE_* to enable)</p>
+      )}
       <p>Backend status: {status || 'loading…'}</p>
 
       <form onSubmit={handleGenerate} style={{ marginTop: 16, display: 'grid', gap: 8 }}>

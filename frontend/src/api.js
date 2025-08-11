@@ -1,4 +1,17 @@
+import { getIdToken } from './auth';
 const BASE = import.meta.env.VITE_API_BASE || '/api';
+
+async function withAuthHeaders(extra = {}) {
+  const token = await getIdToken();
+  return {
+    ...extra,
+    headers: {
+      'content-type': 'application/json',
+      ...(extra.headers || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  };
+}
 
 export const api = {
   async health() {
@@ -8,21 +21,21 @@ export const api = {
     return json.ok ? 'ok' : 'not ok';
   },
   async generateQR({ boxId, ttlSeconds = 300 }) {
-    const res = await fetch(`${BASE}/qr/generate`, {
+    const init = await withAuthHeaders({
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ boxId, ttlSeconds }),
     });
+    const res = await fetch(`${BASE}/qr/generate`, init);
     const json = await res.json();
     if (!res.ok || !json.ok) throw new Error(json.error || `HTTP ${res.status}`);
     return json.data;
   },
   async validateQR({ payload }) {
-    const res = await fetch(`${BASE}/qr/validate`, {
+    const init = await withAuthHeaders({
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ payload }),
     });
+    const res = await fetch(`${BASE}/qr/validate`, init);
     const json = await res.json();
     return json;
   },
@@ -33,21 +46,21 @@ export const api = {
     return json.data.publicKey;
   },
   async createParcel({ boxId, recipientUid }) {
-    const res = await fetch(`${BASE}/parcels`, {
+    const init = await withAuthHeaders({
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ boxId, recipientUid }),
     });
+    const res = await fetch(`${BASE}/parcels`, init);
     const json = await res.json();
     if (!res.ok || !json.ok) throw new Error(json.error || `HTTP ${res.status}`);
     return json.data;
   },
   async notifyParcel({ parcelId, phone, email, ttlSeconds = 900 }) {
-    const res = await fetch(`${BASE}/parcels/${parcelId}/notify`, {
+    const init = await withAuthHeaders({
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ phone, email, ttlSeconds }),
     });
+    const res = await fetch(`${BASE}/parcels/${parcelId}/notify`, init);
     const json = await res.json();
     if (!res.ok || !json.ok) throw new Error(json.error || `HTTP ${res.status}`);
     return json.data;
